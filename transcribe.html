@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Transcribe - Jot Beta 0.0.1</title>
+    <title>Transcribe - Jot Beta 0.0.2</title>
 
     <link href="mycss/style.css" rel="stylesheet">
 
@@ -34,7 +34,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="https://jotbeta.github.io/">JOT</a>
+        <a class="navbar-brand js-scroll-trigger" href="index.html">JOT</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -52,7 +52,7 @@
     </nav>
   </body>
 
-     <body style="background-color:#7d7d7d; text-align:center">
+   <body style="background-color:#7d7d7d; text-align:center">
 
 
     <pre> </pre>
@@ -60,8 +60,12 @@
 
     <!-- <button onclick= "keepListening()" type="button" name="button">IM NOT DONE</button> -->
 
+
     <div class="textArea">
-      <textarea id="transcriptiontext" rows="600" cols="150"></textarea>
+      <textarea id="transcriptionTitle" rows="1" cols="60" style="resize:none"></textarea>
+      <textarea id="transcriptionDate" rows="1" cols="60" style="resize:none"></textarea>
+      <textarea id="tGuess" rows="1" cols="123" style="resize:none"></textarea>
+      <textarea id="transcriptionText" rows="600" cols="123" style="resize:none"></textarea>
     </div>
 
     <head>
@@ -74,6 +78,8 @@
     	<script type="text/javascript" src="../p5/p5.sound.js"></script>
     	<script type="text/javascript" src="../p5/p5.speech.js"></script>
     	<script type="text/javascript" src="../p5/sketch.js"></script>
+
+      <script src="js/continuousSpeech.js"></script>
 
     </head>
 
