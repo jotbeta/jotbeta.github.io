@@ -3,28 +3,26 @@ window.onload = function() {
   keepListening();
 };
 
-var restartDelay = 15;
+var isListening = false;
+var recordingCount = 1;
 
 function keepListening() {
 
+  isListening = false;
+  console.log("listening " + recordingCount++);
   processMic();
-  console.log("kicking off timer");
-  setInterval(countDown, 1000);
 
-  console.log("kicking off rec 1");
-  setInterval(processMic, restartDelay * 1000);
+
+  // console.log("kicking off rec 1");
+  // setInterval(processMic, restartDelay * 1000);
 
   //requires async
-  // await sleep(5000);
+  // if(!isListening){
+  //     await sleep(5000);
+  //     keepListening();
+  // }
 
-}
 
-function countDown() {
-  console.log(restartDelay);
-  restartDelay--;
-  if (restartDelay == 0) {
-    restartDelay += 15;
-  }
 }
 
 function populateInfo() {
@@ -60,6 +58,26 @@ function populateInfo() {
 
 }
 
+function addText(text, confidence){
+
+  if (text.length > 145){
+    if(text.length > 290){
+      document.getElementById("transcriptionText").value += '\n\t\t\t\u2022\t' + text.substring(0, 145) + '-';
+      document.getElementById("transcriptionText").value += '\n\t\t\t\t' + text.substring(145, 290) + '-';
+      document.getElementById("transcriptionText").value += '\n\t\t\t\t' + text.substring(291, text.length) + '  (' + confidence + ')';
+    }
+    else {
+      document.getElementById("transcriptionText").value += '\n\t\t\t\u2022\t' + text.substring(0, 145) + '-';
+      document.getElementById("transcriptionText").value += '\n\t\t\t\t' + text.substring(145, text.length) + '  (' + confidence + ')';
+    }
+  }
+  else {
+    document.getElementById("transcriptionText").value += '\n\t\t\t\u2022\t' + text + '  (' + confidence + ')';
+  }
+
+
+}
+
 function processMic() {
   // document.getElementById("transcriptionText").value += 'kicking off process mic\n';
   let lang = navigator.language || 'en-US';
@@ -70,7 +88,7 @@ function processMic() {
   speechRec.onEnd = speechEnd;
 
   // first is continous (keep true), second is interim (gives lots of results)
-  speechRec.start(true, false);
+  speechRec.start(true, true);
 
 
   var guess = "   ";
@@ -111,10 +129,10 @@ function processMic() {
         // correct the guess with the highest confidence result
        document.getElementById("tGuess").value = '   ' + speechRec.resultString;
 
-       document.getElementById("transcriptionText").value += '\n\t\t\t\u2022\t' + speechRec.resultString + '  (' + speechRec.resultConfidence.toFixed(3) + ')';
+       addText(speechRec.resultString, speechRec.resultConfidence.toFixed(3));
 
-       // createP(speechRec.resultString);
-       // + '(' +       speechRec.resultConfidence + ')';
+       isListening = true;
+       keepListening();
       }
     }
   }
@@ -125,17 +143,12 @@ function processMic() {
 
   function speechError(){
      console.log('ERROR\n')
+     if (!isListening){
+          keepListening();
+     }
    }
 
    function speechEnd(){
       console.log('END RECORD\n')
     }
-}
-
-
-
-
-//requires async function
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
 }

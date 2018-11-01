@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Transcribe - Jot Beta 0.0.2</title>
+    <title>Transcribe - Jot Beta 0.0.3</title>
 
     <link href="mycss/style.css" rel="stylesheet">
 
@@ -41,6 +41,9 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" onclick="downloadNotes()">Download</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="transcribe.html">Transcribe</a>
             </li>
             <li class="nav-item">
@@ -60,6 +63,10 @@
 
     <!-- <button onclick= "keepListening()" type="button" name="button">IM NOT DONE</button> -->
 
+    <!-- <div class="btn-group">
+      <button>Title</button>
+      <button>Date</button>
+    </div> -->
 
     <div class="textArea">
       <textarea id="transcriptionTitle" rows="1" cols="60" style="resize:none"></textarea>
@@ -67,6 +74,9 @@
       <textarea id="tGuess" rows="1" cols="123" style="resize:none"></textarea>
       <textarea id="transcriptionText" rows="600" cols="123" style="resize:none"></textarea>
     </div>
+
+
+
 
     <head>
     	<meta charset="UTF-8">
@@ -77,9 +87,9 @@
     	<script type="text/javascript" src="../p5/p5.dom.js"></script>
     	<script type="text/javascript" src="../p5/p5.sound.js"></script>
     	<script type="text/javascript" src="../p5/p5.speech.js"></script>
-    	<script type="text/javascript" src="../p5/sketch.js"></script>
 
       <script src="js/continuousSpeech.js"></script>
+      <script src="js/fileDownload.js"></script>
 
     </head>
 
